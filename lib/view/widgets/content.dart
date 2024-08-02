@@ -9,13 +9,9 @@ class ImageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: ClipRRect(
-        borderRadius:
-            BorderRadius.circular(10.0), //// adjust the radius as needed
-        child: Image.network(
-          imageUrl,
-          fit: BoxFit.scaleDown, // scale down to fit the width
-        ),
-      ),
+          borderRadius:
+              BorderRadius.circular(10.0), //// adjust the radius as needed
+          child: Image.asset(imageUrl)),
     );
   }
 }

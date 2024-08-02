@@ -39,10 +39,9 @@ class _SplashViewBodyState extends State<SplashViewBody>
             width: double.infinity, // take up the full width
             height:
                 MediaQuery.of(context).size.height, // take up the full height
-            child: Image.network(
-              'assets/imaages/home_back_ground.jpg',
-              fit:
-                  BoxFit.cover, // scale the image to cover the entire container
+            child: Image.asset(
+              "assets/imaages/home_back_ground.jpg",
+              fit: BoxFit.cover,
             ),
           ),
           AnimatedBuilder(
