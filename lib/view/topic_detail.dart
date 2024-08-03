@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../data/models/sub_title.dart';
 import '../data/models/topic.dart';
 import 'widgets/content.dart';
 import 'widgets/custome_header.dart';
@@ -60,7 +61,7 @@ class _TopicDetailsScreenState extends State<TopicDetailsScreen> {
               icon: Icons.arrow_back,
             ),
             const SizedBox(
-              height: 15,
+              height: 20,
             ),
             Expanded(
               child: SingleChildScrollView(
@@ -71,51 +72,75 @@ class _TopicDetailsScreenState extends State<TopicDetailsScreen> {
                   itemCount: widget.topic.titles.length,
                   itemBuilder: (context, index) {
                     return Container(
-                        key: _sectionKeys[index],
-                        child: Column(
-                          children: [
-                            const SizedBox(
-                              height: 5,
+                      key: _sectionKeys[index],
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 18,
+                          ),
+                          //(widget.topic.titles[index] is SubTitle)
+                          //   ?
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 10.0),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: const Color(0xffC76261),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.9),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: const Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ],
                             ),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 10.0, horizontal: 10.0),
+                            child: Text(
+                              (widget.topic.titles[index] as SubTitle).name2,
+                              style: const TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                              ),
+                              textDirection: TextDirection.rtl,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          // : const SizedBox(
+                          //     height: 120,
+                          //   ),
+                          //if (widget.topic.titles[index] is SubTitle)
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                color: const Color(0xffC76261),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.9),
-                                    spreadRadius: 5,
-                                    blurRadius: 7,
-                                    offset: const Offset(
-                                        0, 3), // changes position of shadow
-                                  ),
-                                ],
+                                color: Colors.white,
+                                border: Border.all(color: Colors.black),
                               ),
-                              child: Text(
-                                style: const TextStyle(
-                                    fontSize: 20, color: Colors.white),
-                                textDirection: TextDirection.rtl,
-                                widget.topic.titles[index].name,
+                              child: Column(
+                                children:
+                                    ((widget.topic.titles[index] as SubTitle)
+                                                .contents ??
+                                            [])
+                                        .map((content) {
+                                  if (content.type == 'image') {
+                                    return ImageContent(content.value);
+                                  }
+                                  if (content.type == 'h2') {
+                                    return h2Content(content.value);
+                                  } else {
+                                    return TextContent(content.value);
+                                  }
+                                }).toList(),
                               ),
                             ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            ...widget.topic.titles[index].contents
-                                .map((content) {
-                              if (content.type == 'image') {
-                                return ImageContent(content.value);
-                              }
-                              if (content.type == 'h2') {
-                                return h2Content(content.value);
-                              } else {
-                                return TextContent(content.value);
-                              }
-                            }).toList(),
-                          ],
-                        ));
+                          ),
+                        ],
+                      ),
+                    );
                   },
                 ),
               ),
@@ -134,7 +159,7 @@ class _TopicDetailsScreenState extends State<TopicDetailsScreen> {
                   return ListTile(
                     title: Text(
                         textDirection: TextDirection.rtl,
-                        widget.topic.titles[index].name),
+                        widget.topic.titles[index].name2),
                     onTap: () {
                       _scrollToSection(index);
                       Navigator.pop(

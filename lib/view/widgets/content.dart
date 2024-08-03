@@ -23,12 +23,19 @@ class TextContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(
-        style: const TextStyle(fontSize: 20),
-        textDirection: TextDirection.rtl,
-        text,
-      ),
+    return Column(
+      children: [
+        ListTile(
+          title: Text(
+            style: const TextStyle(fontSize: 20),
+            textDirection: TextDirection.rtl,
+            text,
+          ),
+        ),
+        const SizedBox(
+          height: 10,
+        )
+      ],
     );
   }
 }
@@ -42,7 +49,10 @@ class h2Content extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Color(0xff014262)),
         textDirection: TextDirection.rtl,
         text,
       ),

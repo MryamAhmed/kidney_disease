@@ -11,60 +11,66 @@ class SplashViewBody extends StatefulWidget {
 
 class _SplashViewBodyState extends State<SplashViewBody>
     with SingleTickerProviderStateMixin {
-  //هي الي بتحدد امتي القيمة هتطلع
-
-  late AnimationController animationController; //its value is from 0 to 1 only
-  late Animation<Offset>
-      slidingAnimation; // so we created this animation to put it above controller , to get the values from controller and give me the values i need
+  late AnimationController animationController;
+  late Animation<Offset> slidingAnimation;
 
   @override
   void initState() {
     super.initState();
-    InitSlidingAnimation();
-    NavigateToHome();
+    initSlidingAnimation();
+    navigateToHome();
   }
 
   @override
   void dispose() {
-    super.dispose();
     animationController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            width: double.infinity, // take up the full width
-            height:
-                MediaQuery.of(context).size.height, // take up the full height
-            child: Image.asset(
-              "assets/imaages/home_back_ground.jpg",
-              fit: BoxFit.cover,
-            ),
-          ),
-          AnimatedBuilder(
-            animation: slidingAnimation,
-            builder: (context, _) {
-              return SlideTransition(
-                position: slidingAnimation,
-                child: const Center(
-                  child: Text(
-                    'الفشل الكلوي',
-                    style: TextStyle(color: Color(0xff014262), fontSize: 30),
-                    textAlign: TextAlign.center,
-                  ),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          double screenHeight = constraints.maxHeight;
+          double imageHeight = screenHeight * 0.8;
+
+          return Stack(
+            children: [
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: Image.asset(
+                  "assets/imaages/home_back_ground.jpg",
+                  height: imageHeight,
+                  fit: BoxFit.cover,
                 ),
-              );
-            },
-          ),
-        ],
+              ),
+              AnimatedBuilder(
+                animation: slidingAnimation,
+                builder: (context, _) {
+                  return FractionalTranslation(
+                    translation: slidingAnimation.value,
+                    child: const Center(
+                      child: Text(
+                        'الفشل الكلوي',
+                        style:
+                            TextStyle(color: Color(0xff014262), fontSize: 30),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
+          );
+        },
       ),
     );
   }
 
-  void NavigateToHome() {
+  void navigateToHome() {
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.push(
         context,
@@ -75,20 +81,13 @@ class _SplashViewBodyState extends State<SplashViewBody>
     });
   }
 
-  void InitSlidingAnimation() {
-    animationController = AnimationController(
-        vsync: this,
-        duration: const Duration(
-            seconds:
-                1)); //this refer to SingleTickerProviderStateMixin , duration => the animation will work for minute
-
-    slidingAnimation = Tween<Offset>(
-            begin: const Offset(0, 10), end: const Offset(0, 0))
-        .animate(
-            animationController); // offsetالقيم الي هتدخلك من الكونترولر هتطلعهالي ع هيءة قيمة
+  void initSlidingAnimation() {
+    animationController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+    slidingAnimation =
+        Tween<Offset>(begin: const Offset(0, 1), end: const Offset(0, 0.35))
+            .animate(animationController);
 
     animationController.forward();
-    //to make the ui update
-    slidingAnimation.addListener(() {});
   }
 }
