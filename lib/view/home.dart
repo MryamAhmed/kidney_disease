@@ -11,26 +11,13 @@ class HomeView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(15),
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                      height: 100,
-                      width: 100,
-                      child: Image.asset('assets/imaages/logo.jpg')),
-                  SizedBox(
-                      height: 100,
-                      width: 100,
-                      child: Image.asset('assets/imaages/logo2.jpg')),
-                ],
-              ),
               Center(
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 20.0, horizontal: 40.0),
+                      vertical: 20.0, horizontal: 50.0),
                   decoration: BoxDecoration(
                     gradient: const LinearGradient(
                       colors: [

@@ -1,7 +1,7 @@
 class ContentItem {
   final int id;
   final String type;
-  final String value;
+  final dynamic value;
 
   ContentItem({required this.id, required this.type, required this.value});
 }

@@ -108,10 +108,7 @@ class _TopicDetailsScreenState extends State<TopicDetailsScreen> {
                           const SizedBox(
                             height: 8,
                           ),
-                          // : const SizedBox(
-                          //     height: 120,
-                          //   ),
-                          //if (widget.topic.titles[index] is SubTitle)
+
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
@@ -131,8 +128,14 @@ class _TopicDetailsScreenState extends State<TopicDetailsScreen> {
                                   }
                                   if (content.type == 'h2') {
                                     return h2Content(content.value);
-                                  } else {
+                                  }
+                                  if (content.type == 'text') {
                                     return TextContent(content.value);
+                                  }
+                                  if (content.type == 'h3') {
+                                    return h3Content(content.value);
+                                  } else {
+                                    return Tablewidget(content.value);
                                   }
                                 }).toList(),
                               ),

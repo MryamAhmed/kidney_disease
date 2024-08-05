@@ -59,3 +59,33 @@ class h2Content extends StatelessWidget {
     );
   }
 }
+
+class h3Content extends StatelessWidget {
+  final String text;
+
+  const h3Content(this.text, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        style: const TextStyle(
+            fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+        textDirection: TextDirection.rtl,
+        text,
+      ),
+    );
+  }
+}
+
+class Tablewidget extends StatelessWidget {
+  final Widget table;
+  const Tablewidget(this.table, {super.key});
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal, // Enable horizontal scrolling
+      child: table,
+    );
+  }
+}

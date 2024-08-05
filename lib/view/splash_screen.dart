@@ -33,18 +33,23 @@ class _SplashViewBodyState extends State<SplashViewBody>
       body: LayoutBuilder(
         builder: (context, constraints) {
           double screenHeight = constraints.maxHeight;
-          double imageHeight = screenHeight * 0.8;
+          double screenWidth = constraints.maxWidth;
+
+          // Adjust the image height relative to the screen height
+          double imageHeight =
+              screenHeight * 0.5; // Example: 50% of screen height
 
           return Stack(
             children: [
-              Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                child: Image.asset(
-                  "assets/imaages/home_back_ground.jpg",
+              Center(
+                child: SizedBox(
                   height: imageHeight,
-                  fit: BoxFit.cover,
+                  width: screenWidth, // Ensure the image takes the full width
+                  child: Image.asset(
+                    "assets/imaages/home_back_ground.jpg",
+                    fit: BoxFit
+                        .contain, // Ensures the image fits within the dimensions
+                  ),
                 ),
               ),
               AnimatedBuilder(
@@ -52,12 +57,15 @@ class _SplashViewBodyState extends State<SplashViewBody>
                 builder: (context, _) {
                   return FractionalTranslation(
                     translation: slidingAnimation.value,
-                    child: const Center(
-                      child: Text(
-                        'الفشل الكلوي',
-                        style:
-                            TextStyle(color: Color(0xff014262), fontSize: 30),
-                        textAlign: TextAlign.center,
+                    child: Center(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: const Text(
+                          'الفشل الكلوي',
+                          style:
+                              TextStyle(color: Color(0xff014262), fontSize: 30),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ),
                   );
