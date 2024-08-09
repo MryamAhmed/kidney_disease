@@ -134,6 +134,9 @@ class _TopicDetailsScreenState extends State<TopicDetailsScreen> {
                                   }
                                   if (content.type == 'h3') {
                                     return h3Content(content.value);
+                                  }
+                                  if (content.type == 'same_line') {
+                                    return SameLinewidget(content.value);
                                   } else {
                                     return Tablewidget(content.value);
                                   }

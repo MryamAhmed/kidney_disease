@@ -89,3 +89,60 @@ class Tablewidget extends StatelessWidget {
     );
   }
 }
+
+class SameLinewidget extends StatelessWidget {
+  final String text;
+
+  const SameLinewidget(this.text, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final words = text.split(':');
+    return Padding(
+      padding: const EdgeInsets.all(14.0),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return SizedBox(
+            width: constraints.maxWidth,
+            child: Align(
+              alignment:
+                  Alignment.centerRight, // Aligns the content to the right
+              child: RichText(
+                textAlign:
+                    TextAlign.right, // Aligns text inside RichText to the right
+                softWrap: true, // Enables text wrapping within RichText
+                overflow: TextOverflow
+                    .visible, // Allows the text to wrap instead of overflowing
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: words.last,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 24,
+                      ),
+                    ),
+                    const TextSpan(
+                      text: ' : ', // Adds a space before and after the colon
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 24,
+                      ),
+                    ),
+                    TextSpan(
+                      text: words.first,
+                      style: const TextStyle(
+                        color: Colors.red,
+                        fontSize: 24,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}

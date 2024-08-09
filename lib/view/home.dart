@@ -104,3 +104,5 @@ class HomeView extends StatelessWidget {
     );
   }
 }
+
+//write func to sum two numbers
